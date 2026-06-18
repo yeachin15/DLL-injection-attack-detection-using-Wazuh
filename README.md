@@ -1,8 +1,3 @@
-Detecting process injection attacks with Wazuh
-July 22nd 2022 | by Openime Oniagbi | Wazuh 4.3.6
-
-
-https://wazuh.com/blog/detecting-process-injection-attacks-with-wazuh/
 
 ## 📝 Description
 
@@ -15,9 +10,11 @@ Process injection is a defense evasion technique where an attacker hides malicio
 **Telemetry Collection: Configuring Sysmon to capture kernel-level events (like Event ID 8: CreateRemoteThread).
 
 **SIEM Detection: Writing custom Wazuh rules to trigger high-fidelity alerts and filter out false positives from legitimate applications like Google Chrome.
+
 so we set up our lab environment using the following:
 
 Windows 10/11 64-bit, version 21H2 with Microsoft Visual C++ installed (vc_redist.x64.exe).
+<img width="1398" height="730" alt="Capture1" src="https://github.com/user-attachments/assets/fb90d2bf-241e-4b22-95fc-f38e70aacd3b" />
 
 
 
