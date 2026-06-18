@@ -13,7 +13,7 @@ Process injection is a defense evasion technique where an attacker hides malicio
 
 so we set up our lab environment using the following:
 
-Windows 10/11 64-bit, Microsoft Visual C++ installed ([vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe)).
+Windows 10/11 64-bit, Microsoft Visual C++ installed ([vc_redist.x64.exe]([https://aka.ms/vs/17/release/vc_redist.x64.exe](https://www.microsoft.com/en-us/download/details.aspx?id=53840))).
 <img width="1398" height="730" alt="Capture1" src="https://github.com/user-attachments/assets/fb90d2bf-241e-4b22-95fc-f38e70aacd3b" />
 
 
