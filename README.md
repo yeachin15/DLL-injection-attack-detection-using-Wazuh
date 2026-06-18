@@ -70,19 +70,20 @@ an download the Sysmon configuration file: [sysmonconfig.xml](sysmonconfig.xml).
 
 <img width="1125" height="593" alt="Capture7" src="https://github.com/user-attachments/assets/292407df-2cb7-429b-bcb2-7f8bbe8be980" />
 
-using PowerShell (Run as administrator) and go sysmon folder run this command .\sysmon64.exe -accepteula -i .\sysmonconfig.xml
+using PowerShell (Run as administrator) and go sysmon folder run this command 
+'''.\sysmon64.exe -accepteula -i .\sysmonconfig.xml'''
 
 <img width="1115" height="628" alt="Capture8" src="https://github.com/user-attachments/assets/1eac7461-0362-4ef5-925e-a7a538e98358" />
 
 
 Wazuh agent mechin to open this file "ossec.conf", C:\Program Files (x86)\ossec-agent and edit to collect sysmon logs
 this Rules add tha currect place.
-
+'''
 <localfile>
     <location>Microsoft-Windows-Sysmon/Operational</location>
     <log_format>eventchannel</log_format>
 </localfile>
-
+'''
 <img width="1162" height="611" alt="Capture9" src="https://github.com/user-attachments/assets/68b07a97-1f65-4da9-82f3-b26d21caa20b" />
 
 
@@ -94,10 +95,10 @@ windows star to search "manage" open tha apps than manage to restart
 <img width="328" height="293" alt="Screenshot 2026-06-18 152821" src="https://github.com/user-attachments/assets/9a823deb-d830-46bc-9308-794161ae0479" />
 
 Wazuh server mechin to open this file "local_rules.xml",
-sudo nano /var/ossec/etc/rules/local_rules.xml
+'''sudo nano /var/ossec/etc/rules/local_rules.xml'''
 
 an add this Rules
-
+'''
 <group name="windows,sysmon">
   <rule id="100200" level="12">
     <if_sid>61610</if_sid>
@@ -113,5 +114,6 @@ an add this Rules
     <description>Ignore Windows binaries and Chrome</description>
   </rule>
 </group>
+'''
 <img width="1115" height="628" alt="Screenshot 2026-06-18 155658" src="https://github.com/user-attachments/assets/88cf547a-92eb-4aef-bef2-782416384beb" />
 
