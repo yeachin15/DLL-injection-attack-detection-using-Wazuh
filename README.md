@@ -55,7 +55,7 @@ An installed Wazuh agent on the Windows endpoint
 <img width="328" height="293" alt="Screenshot 2026-06-18 152821" src="https://github.com/user-attachments/assets/da2497ab-c861-444e-b543-2d71e003ef2e" />
 
 [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon) installed on the Windows endpoint
-an download the Sysmon configuration file: sysmonconfig.xml.
+an download the Sysmon configuration file: [sysmonconfig.xml](sysmonconfig.xml).
 <img width="1398" height="692" alt="Capture6" src="https://github.com/user-attachments/assets/11e56845-6976-4d6d-b9eb-5ef5da33c0d0" />
 <img width="1125" height="593" alt="Capture7" src="https://github.com/user-attachments/assets/292407df-2cb7-429b-bcb2-7f8bbe8be980" />
 
