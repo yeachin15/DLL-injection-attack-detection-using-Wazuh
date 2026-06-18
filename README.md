@@ -23,12 +23,14 @@ Windows 10/11 64-bit, Microsoft Visual C++ installed ([vc_redist.x64.exe](https:
 
 
 
+* Download the injection tool from here: [InjectProc Releases](https://github.com/secrary/InjectProc/releases)
+* Download the sample 64-bit DLL for testing: [hello-world-x64.dll Releases](https://github.com/carterjones/hello-world-dll/releases)
 
+[InjectProc](https://github.com/secrary/InjectProc/releases) downloaded and installed on the Windows endpoint.
 
-[InjectProc](https://github.com/secrary/InjectProc/releases] downloaded and installed on the Windows endpoint.
 go GitHub repository> Assets> InjectProc.exe
 
-click  (...) than keep> Delete  to select "keep anyway". 
+click block file (...) than keep> Delete  to select "keep anyway". 
 
 <img width="1398" height="692" alt="Capture3" src="https://github.com/user-attachments/assets/5ca20f03-b6ad-445b-a22e-3258cb590180" />
 <img width="1398" height="692" alt="Capture4" src="https://github.com/user-attachments/assets/44c2f5ea-72b2-464a-9e51-52fcc5613698" />
@@ -37,7 +39,7 @@ click  (...) than keep> Delete  to select "keep anyway".
 
 [hello-world-x64.dll](https://github.com/carterjones/hello-world-dll/releases) downloaded on the Windows endpoint.
 go GitHub repository> Assets> hello-world-x64.dll
-click  (...) than keep> Delete  to select "keep anyway".
+click  block file (...) than keep> Delete  to select "keep anyway".
 
 <img width="1398" height="692" alt="Capture5" src="https://github.com/user-attachments/assets/2220035e-303c-4528-ba93-49f0e9c49978" />
 <img width="546" height="318" alt="Screenshot 2026-06-18 151330" src="https://github.com/user-attachments/assets/360a315f-f2c9-48b2-a937-1fdfc17ab5be" />
