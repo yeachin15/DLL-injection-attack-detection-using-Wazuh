@@ -11,7 +11,7 @@ Process injection is a defense evasion technique where an attacker hides malicio
 
 **SIEM Detection: Writing custom Wazuh rules to trigger high-fidelity alerts and filter out false positives from legitimate applications like Google Chrome.
 
-so we set up our lab environment using the following:
+## so we set up our lab environment using the following:
 
 Windows 10/11 64-bit, Microsoft Visual C++ installed ([vc_redist.x64.exe](https://www.microsoft.com/en-us/download/details.aspx?id=53840)).
 
