@@ -165,22 +165,22 @@ A [Wazuh agent](https://documentation.wazuh.com/current/installation-guide/wazuh
 
 Sysmon was installed to provide enhanced Windows telemetry.
 
-### Components
+### Download Components
 
-* Sysmon64.exe
-* sysmonconfig.xml
+* [Sysmon64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+* [sysmonconfig.xml](sysmonconfig.xml)
 
-![Sysmon Download](Capture6.png)
+<img width="1398" height="692" alt="Capture6" src="https://github.com/user-attachments/assets/11e56845-6976-4d6d-b9eb-5ef5da33c0d0" />
 
-![Sysmon Files](Capture7.png)
+<img width="1125" height="593" alt="Capture7" src="https://github.com/user-attachments/assets/292407df-2cb7-429b-bcb2-7f8bbe8be980" />
 
-Install Sysmon using an elevated PowerShell session:
+Install Sysmon using an elevated PowerShell(Run as administrator) session:
 
 ```powershell
 .\sysmon64.exe -accepteula -i .\sysmonconfig.xml
 ```
 
-![Sysmon Installed](Capture8.png)
+<img width="1115" height="628" alt="Capture8" src="https://github.com/user-attachments/assets/1eac7461-0362-4ef5-925e-a7a538e98358" />
 
 ---
 
