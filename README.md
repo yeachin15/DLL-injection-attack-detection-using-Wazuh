@@ -135,10 +135,10 @@ Download the DLL from the Assets section of the release page.
 
 The following applications were installed to provide legitimate target processes during testing:
 
-* Google Chrome
-* WinRAR
+* [Google Chrome](https://www.google.com/intl/en_uk/chrome/)
+* [WinRAR](https://www.win-rar.com/download.html?&L=0)
 
-![Installed Applications](Screenshot-151330.png)
+
 
 ---
 
@@ -146,17 +146,18 @@ The following applications were installed to provide legitimate target processes
 
 ### Wazuh Manager
 
-A dedicated Wazuh server was deployed to collect and analyze endpoint telemetry.
+A dedicated [Wazuh server](https://github.com/malwarekid/SOAR-Flow) was deployed to collect and analyze endpoint telemetry.
 
-![Wazuh Version](Screenshot-152411.png)
+<img width="802" height="42" alt="Screenshot 2026-06-18 152411" src="https://github.com/user-attachments/assets/1c0855be-94a8-4ca2-b00b-305c5ded176f" />
 
 ---
 
 ### Wazuh Agent
 
-A Wazuh agent was installed on the Windows endpoint to forward Sysmon events.
+A [Wazuh agent](https://documentation.wazuh.com/current/installation-guide/wazuh-agent/index.html) was installed on the Windows endpoint to forward Sysmon events.
 
-![Wazuh Agent](Screenshot-152821.png)
+<img width="328" height="293" alt="Screenshot 2026-06-18 152821" src="https://github.com/user-attachments/assets/da2497ab-c861-444e-b543-2d71e003ef2e" />
+
 
 ---
 
