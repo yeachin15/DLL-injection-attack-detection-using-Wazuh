@@ -211,7 +211,7 @@ Add the following configuration inside the `<ossec_config>` section:
     <log_format>eventchannel</log_format>
 </localfile>
 ```
-
+**`ctrl + s`to save file**
 ### What does this configuration do?
 
 * Collects Sysmon Operational logs
@@ -257,9 +257,13 @@ Restart-Service -Name wazuh
 
 ---
 
-# 🚨 Wazuh Server Custom Detection Rule
+# Technique 1: DLL Injection (MITRE ATT&CK T1055.001)
 
-To detect Process Injection activity, create a custom rule on the Wazuh Manager.
+## 🚨 Wazuh Custom Detection Rule for DLL Injection
+
+To detect Process Injection activity using Sysmon and Wazuh, create a custom detection rule on the Wazuh Manager.
+---
+### Step 1: Create a Custom Rule
 
 Open the local rules file:
 
@@ -268,8 +272,6 @@ sudo nano /var/ossec/etc/rules/local_rules.xml
 ```
 
 Add the following rules:
-
-## 🎯 Custom Detection Rule
 
 ```xml
 <group name="windows,sysmon">
@@ -280,7 +282,7 @@ Add the following rules:
       <id>T1055.001</id>
     </mitre>
   </rule>
- 
+
   <rule id="100100" level="0">
     <if_sid>100200</if_sid>
     <field name="win.eventdata.sourceImage" type="pcre2">(C:\\\\Windows\\\\system32)|chrome.exe</field>
@@ -289,5 +291,184 @@ Add the following rules:
 </group>
 ```
 
+### 💾 Save & Apply Configuration
+
+After adding the rules:
+
+  * Press **Ctrl + O** → Save
+  * Press **Enter** → Confirm
+  * Press **Ctrl + X** → Exit
+ 
 <img width="1115" height="628" alt="Screenshot 2026-06-18 155658" src="https://github.com/user-attachments/assets/88cf547a-92eb-4aef-bef2-782416384beb" />
+---
+### Step 2: Restart the Wazuh Manager
+
+Apply the changes by restarting the Wazuh Manager:
+
+```bash
+sudo systemctl restart wazuh-manager
+```
+
+---
+
+## 🧪 Simulating DLL Injection
+
+1. Open **Command Prompt**
+2. Open **PowerShell as Administrator**.
+3. Navigate to the directory containing `InjectProc.exe` and `hello-world-x64.dll`, then execute:
+
+```powershell
+.\InjectProc.exe dll_inj hello-world-x64.dll cmd.exe
+```
+
+### DLL Injection Execution
+
+<img width="1115" height="628" alt="Capture16" src="https://github.com/user-attachments/assets/d7c4ad19-142d-40f0-a45e-ce57b2cf7efb" />
+
+---
+
+## 🔍 Initial Observation
+
+After executing the DLL injection, the Windows Event Viewer generated **Event ID 1** instead of the expected **Event ID 8**.
+
+### Windows Event Log
+
+<img width="946" height="692" alt="Capture11" src="https://github.com/user-attachments/assets/7f90e2eb-98af-4fce-9bc1-dbbfb83093fd" />
+
+### Wazuh Alert
+
+<img width="1600" height="852" alt="Screenshot 2026-06-19 195906" src="https://github.com/user-attachments/assets/ced9f066-b573-4820-ac9b-504b28c8f563" />
+
+At this stage, Sysmon was only generating **Process Creation (Event ID 1)** logs, while the DLL injection activity was expected to trigger **CreateRemoteThread (Event ID 8)**.
+
+---
+
+## ⚙️ Updating Sysmon Configuration
+
+To capture DLL Injection activity, add the following configuration to the **CreateRemoteThread** section of `sysmonconfig.xml`:
+
+Open notpad(Run as Administrator) file to open `sysmonconfig.xml` file.
+
+`Ctrl + F` to search `<CreateRemoteThread`
+
+```xml
+<CreateRemoteThread onmatch="include">
+  <SourceImage condition="contains">InjectProc.exe</SourceImage>
+</CreateRemoteThread>
+```
+**`ctrl + s`to save file**
+
+<img width="1162" height="611" alt="Capture18" src="https://github.com/user-attachments/assets/bd415dca-726a-41ba-a7a4-3759ba4cc32c" />
+
+Apply the updated Sysmon configuration:
+
+```powershell
+cd C:\Sysmon
+.\Sysmon64.exe -c .\sysmonconfig.xml
+```
+
+---
+
+# 🎯 Result
+
+The custom Sysmon configuration successfully captured the DLL Injection activity through **Event ID 8 (CreateRemoteThread)**. Wazuh then processed the Sysmon event and generated an alert mapped to **MITRE ATT&CK T1055.001 – DLL Injection**.
+
+
+## ✅ Verification After Configuration Update
+
+After updating and reloading the Sysmon configuration, the DLL injection activity successfully generated **Event ID 8 (CreateRemoteThread)** logs.
+
+### Windows Event Log – Event ID 8
+
+<img width="1032" height="619" alt="Capture14" src="https://github.com/user-attachments/assets/4cd7e96f-5745-4d7e-bf93-02d1b51b8d62" />
+
+<img width="1032" height="619" alt="Capture15" src="https://github.com/user-attachments/assets/ba9dc739-0165-475a-97ea-fa829088f204" />
+
+### Wazuh Detection
+
+<img width="1600" height="852" alt="Screenshot 2026-06-19 205853" src="https://github.com/user-attachments/assets/64c07386-6821-48be-9df2-6f082efdafe7" />
+
+---
+
+
+
+
+
+# Technique 2: Process Hollowing / DLL Injection Variant (MITRE ATT&CK T1055.012)
+
+## 🚨 Wazuh Custom Detection Rule
+
+To detect process injection activity, create a custom rule on the Wazuh Manager.
+
+---
+
+### Step 1: Open Local Rules File
+
+```bash id="r1"
+sudo nano /var/ossec/etc/rules/local_rules.xml
+```
+
+---
+
+### Step 2: Add Custom Detection Rule
+
+```
+<group name="windows,sysmon">
+  <rule id="100201" level="12">
+    <if_sid>61600</if_sid>
+    <description>Process injection activity detected: "$(win.eventdata.Image)" has been tampered with</description>
+    <mitre>
+      <id>T1055.012</id>
+    </mitre>
+  </rule>
+</group>
+```
+
+### 💾 Save & Apply Configuration
+
+After adding the rules:
+
+  * Press **Ctrl + O** → Save
+  * Press **Enter** → Confirm
+  * Press **Ctrl + X** → Exit
+
+---
+
+### Step 3: Restart Wazuh Manager
+
+```bash id="r3"<img width="1167" height="685" alt="Capture17" src="https://github.com/user-attachments/assets/33ae4483-53c3-482d-b0dc-75a0e744b695" />
+
+sudo systemctl restart wazuh-manager
+```
+
+---
+
+## 🧪 Simulating Process Injection (proc_replace)
+
+Open **PowerShell (Administrator)** and navigate to the directory containing `InjectProc.exe`.
+
+Run the following command:
+
+```powershell id="r4"
+.\InjectProc.exe proc_rpl "C:\Program Files\Google\Chrome\Application\chrome.exe" "C:\Program Files\WinRAR\WinRAR.exe"
+```
+
+<img width="1167" height="685" alt="Capture17" src="https://github.com/user-attachments/assets/85bf2aa1-feda-4836-89e6-3d9807b655ff" />
+
+---
+
+# 🎯 Result
+
+The custom Wazuh rule successfully detects process injection behavior (T1055.012) by monitoring suspicious process image tampering events generated via Sysmon telemetry.
+
+## 🔍 Detection Output
+
+After execution, Wazuh detected suspicious process behavior based on Sysmon logs and generated an alert mapped to MITRE ATT&CK technique.
+
+### Wazuh Alert Dashboard
+
+<img width="1600" height="852" alt="Screenshot 2026-06-19 222044" src="https://github.com/user-attachments/assets/b9629614-083e-4257-8f7d-a48f2b101e30" />
+
+---
+
 
