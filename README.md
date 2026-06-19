@@ -11,10 +11,9 @@ Process injection is a defense evasion technique where an attacker hides malicio
 **Telemetry Collection: Configuring Sysmon to capture kernel-level events (like Event ID 8: CreateRemoteThread).
 
 **SIEM Detection: Writing custom Wazuh rules to trigger high-fidelity alerts and filter out false positives from legitimate applications like Google Chrome.
+so we set up our lab environment using the following:
 
-
-## so we set up our lab environment using the following:
-
+### Lab Setup
 Windows 10/11 64-bit, Microsoft Visual C++ installed ([vc_redist.x64.exe](https://www.microsoft.com/en-us/download/details.aspx?id=53840)).
 
 
@@ -50,7 +49,6 @@ click block file (...) than keep> Delete  to select "keep anyway".
 
 go GitHub repository> Assets> hello-world-x64.dll
 
-click  block file (...) than keep> Delete  to select "keep anyway".
 
 
 <img width="1398" height="692" alt="Capture5" src="https://github.com/user-attachments/assets/2220035e-303c-4528-ba93-49f0e9c49978" />
@@ -59,7 +57,7 @@ click  block file (...) than keep> Delete  to select "keep anyway".
 <img width="546" height="318" alt="Screenshot 2026-06-18 151330" src="https://github.com/user-attachments/assets/360a315f-f2c9-48b2-a937-1fdfc17ab5be" />
 
 
-Google Chrome and WinRAR installed on the Windows endpoint.
+[Google Chrome](https://www.google.com/intl/en_uk/chrome/) and [WinRAR](https://www.win-rar.com/download.html?&L=0) installed on the Windows endpoint.
 
 An installed [Wazuh server](https://github.com/malwarekid/SOAR-Flow) running version.
 
