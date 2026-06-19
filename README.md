@@ -123,7 +123,7 @@ sudo nano /var/ossec/etc/rules/local_rules.xml
 ```
 
 an add this Rules
-```Rules
+```` Rules
 <group name="windows,sysmon">
   <rule id="100200" level="12">
     <if_sid>61610</if_sid>
@@ -139,7 +139,7 @@ an add this Rules
     <description>Ignore Windows binaries and Chrome</description>
   </rule>
 </group>
-```
+````
 
 
 <img width="1115" height="628" alt="Screenshot 2026-06-18 155658" src="https://github.com/user-attachments/assets/88cf547a-92eb-4aef-bef2-782416384beb" />
