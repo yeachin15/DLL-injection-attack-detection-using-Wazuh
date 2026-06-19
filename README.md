@@ -174,7 +174,11 @@ Sysmon was installed to provide enhanced Windows telemetry.
 
 <img width="1125" height="593" alt="Capture7" src="https://github.com/user-attachments/assets/292407df-2cb7-429b-bcb2-7f8bbe8be980" />
 
+### install sysmon
+
 Install Sysmon using an elevated PowerShell(Run as administrator) session:
+
+Go to Sysmon folder an run this command.
 
 ```powershell
 .\sysmon64.exe -accepteula -i .\sysmonconfig.xml
