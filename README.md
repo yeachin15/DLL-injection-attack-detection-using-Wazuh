@@ -122,7 +122,7 @@ A benign DLL is used as the injection payload.
 
 Download the DLL from the Assets section of the release page.
 
-[DLL Download]([Capture5.png](https://github.com/carterjones/hello-world-dll/releases))
+[DLL Download](https://github.com/carterjones/hello-world-dll/releases)
 
 
 <img width="1398" height="692" alt="Capture5" src="https://github.com/user-attachments/assets/05f6752c-d496-4575-8538-c4457255fb1d" />
