@@ -189,41 +189,89 @@ Go to Sysmon folder an run this command.
 ---
 
 
-<img width="1115" height="628" alt="Capture8" src="https://github.com/user-attachments/assets/1eac7461-0362-4ef5-925e-a7a538e98358" />
+# ⚙️ Wazuh Agent Configuration
 
+After configuring Sysmon, the next step is to enable Sysmon log collection through the Wazuh Agent and create a custom detection rule on the Wazuh Manager.
 
-Wazuh agent mechin to open this file "ossec.conf", C:\Program Files (x86)\ossec-agent and edit to collect sysmon logs
-this Rules add tha currect place.
-```Rules
+---
+
+## 📡 Configure Wazuh Agent to Collect Sysmon Logs
+
+Navigate to the Wazuh Agent installation directory and open the configuration file:
+
+```text
+C:\Program Files (x86)\ossec-agent\ossec.conf
+```
+
+Add the following configuration inside the `<ossec_config>` section:
+
+```xml
 <localfile>
     <location>Microsoft-Windows-Sysmon/Operational</location>
     <log_format>eventchannel</log_format>
 </localfile>
 ```
 
+### What does this configuration do?
+
+* Collects Sysmon Operational logs
+* Forwards Windows Event Channel data to Wazuh
+* Enables visibility into process injection telemetry
+
+### Configuration Example
 
 <img width="1162" height="611" alt="Capture9" src="https://github.com/user-attachments/assets/68b07a97-1f65-4da9-82f3-b26d21caa20b" />
 
 
-Restart the Wazuh agent using PowerShell (Run as administrator) 
-```PowerShell
+---
+
+## 🔄 Restart the Wazuh Agent
+
+After saving the configuration, restart the Wazuh Agent to apply the changes.
+
+### Using PowerShell (Administrator)
+
+```powershell
 Restart-Service -Name wazuh
 ```
 
-or manager apps to restart
-windows star to search "manage" open tha apps than manage to restart
+### Alternative Method
+
+1. Open **Computer Management**
+2. Navigate to **Services**
+3. Locate **Wazuh Agent**
+4. Click **Restart**
+
+<img width="986" height="708" alt="Screenshot 2026-06-19 125736" src="https://github.com/user-attachments/assets/da74055e-ecc8-4df3-896d-eaac6cf8b8c9" />
+
+   
+### or manager apps to restart
+1. windows star to search **manage**
+2. Open **Wazuh Manager**
+3. Locate **manage**
+4. Click **Restart**
 
 
 <img width="328" height="293" alt="Screenshot 2026-06-18 152821" src="https://github.com/user-attachments/assets/9a823deb-d830-46bc-9308-794161ae0479" />
 
 
-Wazuh server mechin to open this file "local_rules.xml",
+---
+
+# 🚨 Wazuh Server Custom Detection Rule
+
+To detect Process Injection activity, create a custom rule on the Wazuh Manager.
+
+Open the local rules file:
+
 ```bash
 sudo nano /var/ossec/etc/rules/local_rules.xml
 ```
 
-an add this Rules
-```` Rules
+Add the following rules:
+
+## 🎯 Custom Detection Rule
+
+```xml
 <group name="windows,sysmon">
   <rule id="100200" level="12">
     <if_sid>61610</if_sid>
@@ -239,8 +287,7 @@ an add this Rules
     <description>Ignore Windows binaries and Chrome</description>
   </rule>
 </group>
-````
-
+```
 
 <img width="1115" height="628" alt="Screenshot 2026-06-18 155658" src="https://github.com/user-attachments/assets/88cf547a-92eb-4aef-bef2-782416384beb" />
 
