@@ -78,14 +78,13 @@ The following components were used to build the detection lab.
 ### Required Runtime
 
 * Microsoft Visual C++ Redistributable (x64)
-
 [Visual C++ Installed](https://www.microsoft.com/en-us/download/details.aspx?id=53840)
+
 
 <img width="1398" height="692" alt="Capture2" src="https://github.com/user-attachments/assets/57157716-bbd4-4b8e-a4ec-e9adb654bf93" />
 
 <img width="1398" height="730" alt="Capture1" src="https://github.com/user-attachments/assets/fb90d2bf-241e-4b22-95fc-f38e70aacd3b" />
 
-<img width="454" height="503" alt="Screenshot 2026-06-18 150249" src="https://github.com/user-attachments/assets/90f5cb01-d832-4e7d-bb50-cabf0885f0d5" />
 
 ---
 
@@ -111,6 +110,8 @@ InjectProc is used to emulate process injection techniques without deploying mal
 
 <img width="563" height="341" alt="Screenshot 2026-06-18 150211" src="https://github.com/user-attachments/assets/5855757a-92e7-446e-a57d-45208275ab36" />
 
+<img width="454" height="503" alt="Screenshot 2026-06-18 150249" src="https://github.com/user-attachments/assets/90f5cb01-d832-4e7d-bb50-cabf0885f0d5" />
+
 ---
 
 ### Test DLL
@@ -121,7 +122,12 @@ A benign DLL is used as the injection payload.
 
 Download the DLL from the Assets section of the release page.
 
-![DLL Download](Capture5.png)
+[DLL Download]([Capture5.png](https://github.com/carterjones/hello-world-dll/releases))
+
+
+<img width="1398" height="692" alt="Capture5" src="https://github.com/user-attachments/assets/05f6752c-d496-4575-8538-c4457255fb1d" />
+
+<img width="546" height="318" alt="Screenshot 2026-06-18 151330" src="https://github.com/user-attachments/assets/c7d9bd48-9da9-4dd7-85ad-3efe68a1720d" />
 
 ---
 
