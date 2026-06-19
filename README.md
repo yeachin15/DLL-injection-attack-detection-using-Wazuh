@@ -1,3 +1,193 @@
+# 🛡️ Detecting Process Injection Attacks with Wazuh & Sysmon
+
+<p align="center">
+<img src="https://img.shields.io/badge/Wazuh-SIEM-blue?style=for-the-badge">
+<img src="https://img.shields.io/badge/Sysmon-Telemetry-green?style=for-the-badge">
+<img src="https://img.shields.io/badge/Windows-10%2F11-blue?style=for-the-badge">
+<img src="https://img.shields.io/badge/MITRE-T1055.001-red?style=for-the-badge">
+</p>
+
+---
+
+## 📖 Overview
+
+This project demonstrates how to build a Security Operations Center (SOC) detection lab capable of identifying **Process Injection Attacks** using **Wazuh SIEM** and **Microsoft Sysmon**.
+
+Process Injection is a common **Defense Evasion** technique where malicious code is injected into legitimate Windows processes to evade detection. To safely emulate this behavior without using malware, this lab leverages **InjectProc**, an open-source process injection simulation tool.
+
+The objective is to generate process injection telemetry on a Windows endpoint, collect it through Sysmon, forward it to Wazuh, and create custom detection rules that generate high-fidelity alerts while reducing false positives.
+
+---
+
+## 🎯 Project Objectives
+
+### 🔥 Attack Simulation
+
+Emulate common process injection techniques using **InjectProc** on a Windows endpoint.
+
+### 📡 Telemetry Collection
+
+Configure **Sysmon** to capture low-level Windows events, including:
+
+* Event ID 8 – CreateRemoteThread
+* Process Creation Events
+* DLL Load Events
+
+### 🚨 SIEM Detection
+
+Develop custom **Wazuh rules** that:
+
+* Detect suspicious injection activity
+* Map detections to MITRE ATT&CK
+* Suppress common false positives
+* Generate analyst-friendly alerts
+
+---
+
+## 🏗️ Lab Architecture
+
+```mermaid
+flowchart LR
+
+A[InjectProc Attack Simulation]
+--> B[Windows Endpoint]
+
+B --> C[Sysmon]
+
+C --> D[Wazuh Agent]
+
+D --> E[Wazuh Manager]
+
+E --> F[Security Alert]
+```
+
+---
+
+# ⚙️ Lab Setup
+
+The following components were used to build the detection lab.
+
+---
+
+## 💻 Windows Endpoint
+
+### Operating System
+
+* Windows 10 / 11 (64-bit)
+
+### Required Runtime
+
+* Microsoft Visual C++ Redistributable (x64)
+
+[Visual C++ Installed](https://www.microsoft.com/en-us/download/details.aspx?id=53840)
+
+<img width="1398" height="692" alt="Capture2" src="https://github.com/user-attachments/assets/57157716-bbd4-4b8e-a4ec-e9adb654bf93" />
+
+<img width="1398" height="730" alt="Capture1" src="https://github.com/user-attachments/assets/fb90d2bf-241e-4b22-95fc-f38e70aacd3b" />
+
+<img width="454" height="503" alt="Screenshot 2026-06-18 150249" src="https://github.com/user-attachments/assets/90f5cb01-d832-4e7d-bb50-cabf0885f0d5" />
+
+---
+
+## 🧪 Attack Simulation Tools
+
+### InjectProc
+
+InjectProc is used to emulate process injection techniques without deploying malware.
+
+#### Installation Steps
+
+1. Download [**InjectProc.exe**](https://github.com/secrary/InjectProc/releases)
+2. Navigate to the **Assets** section of the release page
+3. Download the executable
+4. If Microsoft Defender blocks the file:
+
+   * Click **(...)**
+   * Click **Keep**
+   * Click **Delete Drop Down**
+   * Select **Keep Anyway**
+
+<img width="1398" height="692" alt="Capture3" src="https://github.com/user-attachments/assets/5ca20f03-b6ad-445b-a22e-3258cb590180" />
+
+<img width="563" height="341" alt="Screenshot 2026-06-18 150211" src="https://github.com/user-attachments/assets/5855757a-92e7-446e-a57d-45208275ab36" />
+
+---
+
+### Test DLL
+
+A benign DLL is used as the injection payload.
+
+**File:** `hello-world-x64.dll`
+
+Download the DLL from the Assets section of the release page.
+
+![DLL Download](Capture5.png)
+
+---
+
+## 🧰 Additional Software
+
+The following applications were installed to provide legitimate target processes during testing:
+
+* Google Chrome
+* WinRAR
+
+![Installed Applications](Screenshot-151330.png)
+
+---
+
+## 🛡️ Wazuh Infrastructure
+
+### Wazuh Manager
+
+A dedicated Wazuh server was deployed to collect and analyze endpoint telemetry.
+
+![Wazuh Version](Screenshot-152411.png)
+
+---
+
+### Wazuh Agent
+
+A Wazuh agent was installed on the Windows endpoint to forward Sysmon events.
+
+![Wazuh Agent](Screenshot-152821.png)
+
+---
+
+## 🔍 Sysmon Deployment
+
+Sysmon was installed to provide enhanced Windows telemetry.
+
+### Components
+
+* Sysmon64.exe
+* sysmonconfig.xml
+
+![Sysmon Download](Capture6.png)
+
+![Sysmon Files](Capture7.png)
+
+Install Sysmon using an elevated PowerShell session:
+
+```powershell
+.\sysmon64.exe -accepteula -i .\sysmonconfig.xml
+```
+
+![Sysmon Installed](Capture8.png)
+
+---
+
+## ✅ Environment Summary
+
+| Component       | Purpose              |
+| --------------- | -------------------- |
+| Windows 10/11   | Test Endpoint        |
+| Sysmon          | Telemetry Collection |
+| Wazuh Agent     | Log Forwarding       |
+| Wazuh Manager   | SIEM Platform        |
+| InjectProc      | Attack Emulation     |
+| Hello World DLL | Injection Payload    |
+| Chrome / WinRAR | Target Processes     |
 
 
 ## 📝 Description
