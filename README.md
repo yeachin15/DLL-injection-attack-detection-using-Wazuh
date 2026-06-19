@@ -85,7 +85,7 @@ an download the Sysmon configuration file: [sysmonconfig.xml](sysmonconfig.xml).
 
 
 using PowerShell (Run as administrator) and go sysmon folder run this command 
-```
+```PowerShell
 .\sysmon64.exe -accepteula -i .\sysmonconfig.xml
 ```
 
@@ -94,7 +94,7 @@ using PowerShell (Run as administrator) and go sysmon folder run this command
 
 Wazuh agent mechin to open this file "ossec.conf", C:\Program Files (x86)\ossec-agent and edit to collect sysmon logs
 this Rules add tha currect place.
-```
+```Rules
 <localfile>
     <location>Microsoft-Windows-Sysmon/Operational</location>
     <log_format>eventchannel</log_format>
@@ -106,7 +106,7 @@ this Rules add tha currect place.
 
 
 Restart the Wazuh agent using PowerShell (Run as administrator) 
-```
+```PowerShell
 Restart-Service -Name wazuh
 ```
 
@@ -118,12 +118,12 @@ windows star to search "manage" open tha apps than manage to restart
 
 
 Wazuh server mechin to open this file "local_rules.xml",
-```
+```bash
 sudo nano /var/ossec/etc/rules/local_rules.xml
 ```
 
 an add this Rules
-```
+```Rules
 <group name="windows,sysmon">
   <rule id="100200" level="12">
     <if_sid>61610</if_sid>
