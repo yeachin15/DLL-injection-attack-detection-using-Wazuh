@@ -81,9 +81,9 @@ The following components were used to build the detection lab.
 [Visual C++ Installed](https://www.microsoft.com/en-us/download/details.aspx?id=53840)
 
 
-<img width="1398" height="692" alt="Capture2" src="https://github.com/user-attachments/assets/57157716-bbd4-4b8e-a4ec-e9adb654bf93" />
+<img width="1027" height="311" alt="Capture2" src="https://github.com/user-attachments/assets/427a6a28-16fb-443e-84c6-04f7df9cb41a" />
 
-<img width="1398" height="730" alt="Capture1" src="https://github.com/user-attachments/assets/fb90d2bf-241e-4b22-95fc-f38e70aacd3b" />
+<img width="813" height="427" alt="Capture1" src="https://github.com/user-attachments/assets/05539209-a660-42f3-83ba-2b84fa2a6c57" />
 
 
 ---
@@ -106,7 +106,7 @@ InjectProc is used to emulate process injection techniques without deploying mal
    * Click **Delete Drop Down**
    * Select **Keep Anyway**
 
-<img width="1398" height="692" alt="Capture3" src="https://github.com/user-attachments/assets/5ca20f03-b6ad-445b-a22e-3258cb590180" />
+<img width="1135" height="431" alt="Capture3" src="https://github.com/user-attachments/assets/ec3b52d5-cc1f-4d20-a461-36d2c68f4e41" />
 
 <img width="563" height="341" alt="Screenshot 2026-06-18 150211" src="https://github.com/user-attachments/assets/5855757a-92e7-446e-a57d-45208275ab36" />
 
@@ -250,9 +250,7 @@ Restart-Service -Name wazuh
 3. Locate **manage**
 4. Click **Restart**
 
-
-<img width="328" height="293" alt="Screenshot 2026-06-18 152821" src="https://github.com/user-attachments/assets/9a823deb-d830-46bc-9308-794161ae0479" />
-
+<img width="323" height="288" alt="Screenshot 2026-06-22 151222" src="https://github.com/user-attachments/assets/246feedd-8e56-4c47-91ff-00a59e4c3af4" />
 
 ---
 
@@ -299,6 +297,7 @@ After adding the rules:
   * Press **Ctrl + X** → Exit
  
 <img width="1115" height="628" alt="Screenshot 2026-06-18 155658" src="https://github.com/user-attachments/assets/88cf547a-92eb-4aef-bef2-782416384beb" />
+
 ---
 
 ### Step 2: Restart the Wazuh Manager
@@ -323,7 +322,7 @@ sudo systemctl restart wazuh-manager
 
 ### DLL Injection Execution
 
-<img width="1115" height="628" alt="Capture16" src="https://github.com/user-attachments/assets/d7c4ad19-142d-40f0-a45e-ce57b2cf7efb" />
+<img width="697" height="354" alt="Capture16" src="https://github.com/user-attachments/assets/81767f77-2146-4698-9180-5044b0c4b2d0" />
 
 ---
 
@@ -338,7 +337,7 @@ DLL injection activity successfully generated **Event ID 8 (CreateRemoteThread)*
 
 ### Windows Event Log 
 
-Windows Event Log capture tha **Event ID:8**
+Windows Event Log capture tha **CreateRemoteThread detected, Event ID:8**
 
 <img width="1032" height="619" alt="Capture15" src="https://github.com/user-attachments/assets/ba9dc739-0165-475a-97ea-fa829088f204" />
 
@@ -346,9 +345,9 @@ Windows Event Log capture tha **Event ID:8**
 
 Wazuh manager capture the **Technique:T1055.001** and **Rules ID:100200**
 
-<img width="1600" height="852" alt="Screenshot 2026-06-19 215854" src="https://github.com/user-attachments/assets/62e060d5-ab4b-4983-a196-fc61a32f20d5" />
+<img width="1600" height="175" alt="Screenshot 2026-06-19 215854" src="https://github.com/user-attachments/assets/9c66eab0-50f0-44d1-ab67-a8632c4904be" />
 
-<img width="1600" height="852" alt="Screenshot 2026-06-19 205853" src="https://github.com/user-attachments/assets/64c07386-6821-48be-9df2-6f082efdafe7" />
+<img width="1147" height="658" alt="Screenshot 2026-06-19 205853" src="https://github.com/user-attachments/assets/4cf1fa55-e498-4dad-9d5e-135338e76aad" />
 
 ---
 
@@ -427,9 +426,16 @@ The custom Wazuh rule successfully detects process injection behavior (T1055.012
 
 After execution, Wazuh detected suspicious process behavior based on Sysmon logs and generated an alert mapped to MITRE ATT&CK technique.
 
+### Windows Event Log
+Windows Event Log capture tha **Process Tampering, Event ID:25**
+
+<img width="903" height="572" alt="Capture19" src="https://github.com/user-attachments/assets/08b4d6a2-8219-4bc9-b08c-66afecb6d657" />
+
 ### Wazuh Alert Dashboard
 
-<img width="1600" height="852" alt="Screenshot 2026-06-19 222044" src="https://github.com/user-attachments/assets/b9629614-083e-4257-8f7d-a48f2b101e30" />
+<img width="1553" height="94" alt="Screenshot 2026-06-22 163018" src="https://github.com/user-attachments/assets/1a553ef9-6aee-41a3-bafc-3782c6ad4820" />
+
+<img width="1570" height="613" alt="Screenshot 2026-06-22 162330" src="https://github.com/user-attachments/assets/2363e503-e3d9-40f4-b783-01d03d2f53f2" />
 
 ---
 
