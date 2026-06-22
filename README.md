@@ -198,10 +198,9 @@ After configuring Sysmon, the next step is to enable Sysmon log collection throu
 ## 📡 Configure Wazuh Agent to Collect Sysmon Logs
 
 Navigate to the Wazuh Agent installation directory and open the configuration file:
-
-```text
+`
 C:\Program Files (x86)\ossec-agent\ossec.conf
-```
+`
 
 Add the following configuration inside the `<ossec_config>` section:
 
@@ -301,6 +300,7 @@ After adding the rules:
  
 <img width="1115" height="628" alt="Screenshot 2026-06-18 155658" src="https://github.com/user-attachments/assets/88cf547a-92eb-4aef-bef2-782416384beb" />
 ---
+
 ### Step 2: Restart the Wazuh Manager
 
 Apply the changes by restarting the Wazuh Manager:
@@ -313,7 +313,7 @@ sudo systemctl restart wazuh-manager
 
 ## 🧪 Simulating DLL Injection
 
-1. Open **Command Prompt**
+1. `windows + r` to open **cmd**
 2. Open **PowerShell as Administrator**.
 3. Navigate to the directory containing `InjectProc.exe` and `hello-world-x64.dll`, then execute:
 
@@ -327,64 +327,26 @@ sudo systemctl restart wazuh-manager
 
 ---
 
-## 🔍 Initial Observation
-
-After executing the DLL injection, the Windows Event Viewer generated **Event ID 1** instead of the expected **Event ID 8**.
-
-### Windows Event Log
-
-<img width="946" height="692" alt="Capture11" src="https://github.com/user-attachments/assets/7f90e2eb-98af-4fce-9bc1-dbbfb83093fd" />
-
-### Wazuh Alert
-
-<img width="1600" height="852" alt="Screenshot 2026-06-19 195906" src="https://github.com/user-attachments/assets/ced9f066-b573-4820-ac9b-504b28c8f563" />
-
-At this stage, Sysmon was only generating **Process Creation (Event ID 1)** logs, while the DLL injection activity was expected to trigger **CreateRemoteThread (Event ID 8)**.
-
----
-
-## ⚙️ Updating Sysmon Configuration
-
-To capture DLL Injection activity, add the following configuration to the **CreateRemoteThread** section of `sysmonconfig.xml`:
-
-Open notpad(Run as Administrator) file to open `sysmonconfig.xml` file.
-
-`Ctrl + F` to search `<CreateRemoteThread`
-
-```xml
-<CreateRemoteThread onmatch="include">
-  <SourceImage condition="contains">InjectProc.exe</SourceImage>
-</CreateRemoteThread>
-```
-**`ctrl + s`to save file**
-
-<img width="1162" height="611" alt="Capture18" src="https://github.com/user-attachments/assets/bd415dca-726a-41ba-a7a4-3759ba4cc32c" />
-
-Apply the updated Sysmon configuration:
-
-```powershell
-cd C:\Sysmon
-.\Sysmon64.exe -c .\sysmonconfig.xml
-```
-
----
-
 # 🎯 Result
 
-The custom Sysmon configuration successfully captured the DLL Injection activity through **Event ID 8 (CreateRemoteThread)**. Wazuh then processed the Sysmon event and generated an alert mapped to **MITRE ATT&CK T1055.001 – DLL Injection**.
+The custom Wazuh rules configuration successfully captured the DLL Injection activity through **Event ID 8 (CreateRemoteThread)**. Wazuh then processed the Sysmon event and generated an alert mapped to **MITRE ATT&CK T1055.001 – DLL Injection**.
 
 
-## ✅ Verification After Configuration Update
+## ✅  Detection Output
 
-After updating and reloading the Sysmon configuration, the DLL injection activity successfully generated **Event ID 8 (CreateRemoteThread)** logs.
+DLL injection activity successfully generated **Event ID 8 (CreateRemoteThread)** logs.
 
-### Windows Event Log – Event ID 8
+### Windows Event Log 
 
-<img width="1032" height="619" alt="Capture14" src="https://github.com/user-attachments/assets/4cd7e96f-5745-4d7e-bf93-02d1b51b8d62" />
+Windows Event Log capture tha **Event ID:8**
 
 <img width="1032" height="619" alt="Capture15" src="https://github.com/user-attachments/assets/ba9dc739-0165-475a-97ea-fa829088f204" />
 
 ### Wazuh Detection
+
+Wazuh manager capture the **Technique:T1055.001** and **Rules ID:100200**
+
+<img width="1600" height="852" alt="Screenshot 2026-06-19 215854" src="https://github.com/user-attachments/assets/62e060d5-ab4b-4983-a196-fc61a32f20d5" />
 
 <img width="1600" height="852" alt="Screenshot 2026-06-19 205853" src="https://github.com/user-attachments/assets/64c07386-6821-48be-9df2-6f082efdafe7" />
 
